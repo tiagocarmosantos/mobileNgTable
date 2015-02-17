@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>mobileNgTable sample</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
+	
+	<script src="jquery-mobile-angular-adapter-standalone.js"></script> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+	<script src="../lib/mobileNgTable.js"></script>
+	<link rel="stylesheet" href="footable/footable.core.css"/>
+	<script src="footable/footable.js" ></script>
+	<script src="footable/footable.sort.js" ></script>
+	<script src="footable/footable.filter.js" ></script>
+	<script src="sample.js"></script>
+
+	<style>
+	/*hide the column-toggle button from the table*/
+	.ui-table-columntoggle-btn {
+		display: none !important;
+	}
+	.footable-last-column {
+		width:10%;
+	}
+	</style>
+</head>
+
+<body data-ng-app="sampleApp">
+	<div id="page" data-role="page" data-ng-controller="sampleController">
+        <div data-role="header">
+            <h1>科目管理</h1>
+        </div>
+        <!-- /header -->
+        <div style="overflow:auto;" data-role="content">
+            <form name="sampleForm">
+                <fieldset class="ui-grid-b">
+                    <div class="ui-block-a"><input type="text" data-ng-model="model.accountName" required placeholder="科目名稱" /></div>
+                    <div class="ui-block-b"><select class="form-control" data-ng-options="account.accountName for account in accountOpts" data-ng-model="model.account"></select></div>	
+                    <div class="ui-block-c"><input type="button" value="新增" data-ng-disabled="sampleForm.$invalid"
+                        data-ng-click="add()"/></div>
+                </fieldset>
+            </form>
+            <mobile-Ng-Table load-Repeat="mobileNgTable" data-mode="columntoggle" class="ui-responsive table-stroke footable"></mobile-Ng-Table>
+        </div>
+        <!-- /content -->
+    </div>
+</body>
+
+</html>
