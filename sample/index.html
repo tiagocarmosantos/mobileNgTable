@@ -16,11 +16,9 @@
 </head>
 
 <body data-ng-app="sampleApp">
-    <div id="page" data-role="page" data-ng-controller="sampleController">
-	<h2 ng-if="contatos.length > 0">::ngComponents - Table</h2>
-	<div class="table-responsive">
+    <h2 ng-if="contatos.length > 0">::ngComponents - Table</h2>
+    <div class="table-responsive">
 	<mobile-ng-table ng-if="contatos.length > 0" load-Repeat="contatosNgTable"></mobile-ng-table>
-	</div>
     </div>
 </body>
 
