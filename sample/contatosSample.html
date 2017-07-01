@@ -1,9 +1,0 @@
-<div class="card">
-	<input class="form-control" type="text" ng-model="pesquisarContato" ng-model-options="{updateOn: 'default blur', debounce:{default: 500, blur: 0}}" placeholder="O que você está buscando?">
-	<hr>
-	<h2 ng-if="contatos.length > 0">::ngComponents - Table</h2>
-	<div class="table-responsive">
-	<mobile-ng-table ng-if="contatos.length > 0" load-Repeat="contatosNgTable"></mobile-ng-table>
-	</div>
-	<hr>
-</div>
