@@ -185,8 +185,3 @@
 	//carregarContatos();
     });
 })();
-$(function() {
-    $(document).on("pageshow", "#page", function(event, data) {
-        $('.footable').footable();
-    });
-});
