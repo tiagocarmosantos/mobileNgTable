@@ -1,276 +1,188 @@
 (function() {
     var app = angular.module("sampleApp", ['xMobileNgTable']);
     app.controller('sampleController', function($scope, $filter) {
-        $scope.model = {};
-        var data = {
-            "L": "負債",
-            "E": "支出",
-            "A": "資產",
-            "I": "收入"
-        };
-        var datas = [];
-        angular.forEach(data, function(row, index) {
-            datas.push({
-                accountType: index,
-                accountName: row
-            })
-        });
-        $scope.accountOpts = datas;
-        $scope.model.account = $scope.accountOpts[3];
-        $scope.mobileNgTableData = [{
-            "id": 1,
-            "accountName": "3C產品",
-            "accountType": "E",
-			"cash":2.522
+     $scope.app = "Lista Telefônica";
+     $scope.contatos = [
+    {
+      "id": 1,
+      "nome": "Jean",
+      "telefone": "98621-4487",
+      "data": "2017-02-11T02:15:12.356Z",
+      "operadora": {
+        "nome": "Oi",
+        "codigo": 14,
+        "categoria": "Celular",
+        "preco": 2
+      },
+      "cor": "blue",
+      "selecionado": false,
+      "visualizavel": true,
+      "editavel": true,
+      "deletavel": true
+    },
+    {
+      "id": 2,
+      "nome": "Tiago",
+      "telefone": "98621-4488",
+      "data": "2017-02-11T02:15:12.356Z",
+      "operadora": {
+        "nome": "Vivo",
+        "codigo": 15,
+        "categoria": "Celular",
+        "preco": 1
+      },
+      "cor": "orange",
+      "selecionado": false,
+      "visualizavel": true,
+      "editavel": false,
+      "deletavel": true
+    },
+    {
+      "telefone": "98621-4485",
+      "data": "2017-03-20T01:47:37.689Z",
+      "operadora": {
+        "id": 4,
+        "nome": "GVT",
+        "codigo": 21,
+        "categoria": "Fixo",
+        "preco": 2
+      },
+      "nome": "LEONARDO CAMPOS",
+      "cor": "green",
+      "selecionado": false,
+      "serial": "3'\"",
+      "id": 3
+    },
+    {
+      "nome": "LUCIANO JATOBA",
+      "telefone": "98621-4486",
+      "data": "2017-03-20T02:08:18.287Z",
+      "operadora": {
+        "id": 4,
+        "nome": "GVT",
+        "codigo": 21,
+        "categoria": "Fixo",
+        "preco": 2
+      },
+      "cor": "red",
+      "selecionado": false,
+      "serial": "U,A",
+      "id": 4
+    },
+    {
+      "nome": "JOSEANE SAND",
+      "telefone": "98621-4482",
+      "data": "2017-03-20T02:09:10.320Z",
+      "operadora": {
+        "id": 3,
+        "nome": "Tim",
+        "codigo": 45,
+        "categoria": "Celular",
+        "preco": 3
+      },
+      "cor": "yellow",
+      "selecionado": false,
+      "serial": "+Z ",
+      "id": 5
+    }
+  ];
+	    
+    $scope.contatosNgTable = {
+        data: 'contatos',
+        class: 'ui-responsive table table-hover table-striped table-bordered table-condensed table-list table-stroke footable',
+        search: 'pesquisarContato',
+        select: 'selecionado',
+        visualisable: 'visualizavel',
+        editable: 'editavel',
+        deletable: 'deletavel',
+        columnDefs: [{
+            field: 'serial',
+            displayName: 'Serial',
+            hide: 'phone,tablet',
+            sort: true,
+            width: "10%"
         }, {
-            "id": 2,
-            "accountName": "三餐.breakfast",
-            "accountType": "E",
-			"cash":2.5
+            field: 'nome',
+            displayName: 'Nome',
+            sort: true,
+            width: "50%",
+            filter: 'capitalize'
         }, {
-            "id": 3,
-            "accountName": "三餐.dinner",
-            "accountType": "E",
-			"cash":2.5
+            field: 'telefone',
+            displayName: 'Telefone',
+            hide: 'phone,tablet',
+            sort: true,
+            width: '20%'
         }, {
-            "id": 4,
-            "accountName": "三餐.lunch",
-            "accountType": "E",
-			"cash":2.512
-        }, {
-            "id": 5,
-            "accountName": "交通費",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 6,
-            "accountName": "交際費",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 7,
-            "accountName": "保健醫療",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 8,
-            "accountName": "其它",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 9,
-            "accountName": "其它收入",
-            "accountType": "I",
-			"cash":2.5
-        }, {
-            "id": 10,
-            "accountName": "利息費",
-            "accountType": "E",
-			"cash":21.5
-        }, {
-            "id": 11,
-            "accountName": "創業.楊家農社",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 12,
-            "accountName": "呆帳",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 13,
-            "accountName": "外宿費",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 14,
-            "accountName": "娛樂費",
-            "accountType": "E",
-			"cash":16.5
-        }, {
-            "id": 15,
-            "accountName": "家務費",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 16,
-            "accountName": "應付帳款",
-            "accountType": "L",
-			"cash":2.5
-        }, {
-            "id": 17,
-            "accountName": "應付帳款.台新eTag卡.無分期",
-            "accountType": "L",
-			"cash":2.5
-        }, {
-            "id": 18,
-            "accountName": "應付帳款.家福卡.分期",
-            "accountType": "L",
-			"cash":2.5
-        }, {
-            "id": 19,
-            "accountName": "應付帳款.家福卡.無分期",
-            "accountType": "L",
-			"cash":2.5
-        }, {
-            "id": 20,
-            "accountName": "應付帳款.就貸台銀",
-            "accountType": "L",
-			"cash":14.5
-        }, {
-            "id": 21,
-            "accountName": "應付帳款.就貸富邦",
-            "accountType": "L",
-			"cash":2.5
-        }, {
-            "id": 22,
-            "accountName": "應收帳款",
-            "accountType": "A",
-			"cash":22.5
-        }, {
-            "id": 23,
-            "accountName": "手續費",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 24,
-            "accountName": "投資.股票",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 25,
-            "accountName": "日用品",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 26,
-            "accountName": "書籍",
-            "accountType": "E",
-			"cash":66
-        }, {
-            "id": 27,
-            "accountName": "現金",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 28,
-            "accountName": "置裝費",
-            "accountType": "E",
-			"cash":2.5
-        }, {
-            "id": 29,
-            "accountName": "美容費",
-            "accountType": "E",
-			"cash":2.52
-        }, {
-            "id": 30,
-            "accountName": "薪資收入",
-            "accountType": "I",
-			"cash":2.5
-        }, {
-            "id": 31,
-            "accountName": "銀行.中信",
-            "accountType": "A",
-			"cash":99.54
-        }, {
-            "id": 32,
-            "accountName": "銀行.中信定存",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 33,
-            "accountName": "銀行.台新",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 34,
-            "accountName": "銀行.台新基金",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 35,
-            "accountName": "銀行.台新定存",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 36,
-            "accountName": "銀行.國泰",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 37,
-            "accountName": "銀行.富邦",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 38,
-            "accountName": "銀行.灣銀",
-            "accountType": "A",
-			"cash":232.5
-        }, {
-            "id": 39,
-            "accountName": "銀行.華南",
-            "accountType": "A",
-			"cash":22.1
-        }, {
-            "id": 40,
-            "accountName": "銀行.郵局",
-            "accountType": "A",
-			"cash":2.5
-        }, {
-            "id": 41,
-            "accountName": "銀行回饋",
-            "accountType": "I",
-			"cash":2.5
-        }, {
-            "id": 42,
-            "accountName": "零嘴",
-            "accountType": "E",
-			"cash":242.15
-        }, {
-            "id": 43,
-            "accountName": "電話費",
-            "accountType": "E",
-			"cash":2.5
-        }];
-        $scope.mobileNgTable = {
-            data: 'mobileNgTableData',
-            columnDefs: [{
-                field: 'id',
-                displayName: '編號',
-				width:"10%"
-            }, {
-                field: 'accountName',
-                displayName: '科目名稱',
-				width:"50%"
-            }, {
-                field: 'accountType',
-                displayName: '型態',
-                hide: "phone,tablet",
-                sort: true,
-				width:"20%"
-            }, {
-                field: 'cash',
-                displayName: '金額',
-                hide: "phone,tablet",
-				width:"10%",
-				filter:"number:1",
-            }],
-            rowDeleteClick: function(e, row) {
-                var result = $filter('filter')($scope.mobileNgTableData, row);
-                if (result.length > 0) {
-                    var index = $scope.mobileNgTableData.indexOf(result[0]);
-                    $scope.mobileNgTableData.splice(index, 1);
-                }
-            }
-        };
-        $scope.add = function() {
-            var newData = {
-                accountName: $scope.model.accountName,
-                accountType: $scope.model.account.accountType
-            };
-            $scope.mobileNgTableData.unshift(newData);
+            field: 'data',
+            displayName: 'Data',
+            sort: true,
+            width: '20%',
+            filter: 'date'
+        }],
+        pager: { enable: true, startPage: 1, limitPerPage: 2, sizes: [2, 5, 8, 10], type:'local', class: 'pager' },
+        rowSelectClick: function (e, row) {
+        	console.log('Fui Clicado!');
+            return true;
+        },
+        rowDeleteClick: function (e, row) {
+            event.preventDefault();
+            console.log('Fui Clicado!');
+            return false;
+        },
+        rowEditClick: function (e, row) {
+            event.preventDefault();
+            console.log('Fui Clicado!');
+            return false;
+        },
+        rowViewClick: function (e, row) {
+            event.preventDefault();
+            console.log('Fui Clicado!');
+            return false;
+        },
+        pagerReloadClick: function (e, pagerConfig) {
+        	console.log('Fui Atualizado!');
         }
+    };
+
+	var init = function(){
+		calcularImpostos($scope.contatos);
+	};
+
+	var calcularImpostos = function(contatos){
+		contatos.forEach(function(contato){
+			contato.operadora.precoComImposto = calcularImposto(contato.operadora.preco);
+		});
+	}
+
+	var carregarContatos = function () {
+		contatosAPI.getContatos($scope);
+	};
+
+	$scope.apagarContatos = function(contatos){
+		contatos.forEach(function(contato) {
+			 if (contato.selecionado) contatosAPI.deleteContato($scope, contato);
+		});
+	};
+
+	$scope.verificarContatoSelecionado = function(contatos) {
+		$scope.hasContatoSelecionado = contatos.some(function(contato) {
+			return contato.selecionado;
+		});
+	};
+
+	$scope.ordernarPor = function(campo) {
+		$scope.ordenarContato = campo;
+		$scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
+	};
+	
+	var calcularImposto = function(preco){
+		var imposto = 1.2;
+		return preco * imposto;
+	};
+
+	init();
+	//carregarContatos();
     });
 })();
 $(function() {
