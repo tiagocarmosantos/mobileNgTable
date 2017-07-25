@@ -1,6 +1,7 @@
 (function() {
     var app = angular.module("sampleApp", ['xMobileNgTable']);
     app.controller('sampleController', function($scope, $filter) {
+     console.log('sampleController Iniciado!');
      $scope.app = "Lista Telefônica";
      $scope.contatos = [
     {
