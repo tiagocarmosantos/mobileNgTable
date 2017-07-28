@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module("sampleApp", ['xMobileNgTable']);
+	
     app.controller('sampleController', function($scope, $filter) {
-     console.log('sampleController Iniciado!');
      $scope.app = "Lista Telefônica";
      $scope.contatos = [
     {
@@ -123,66 +123,28 @@
         }],
         pager: { enable: true, startPage: 1, limitPerPage: 2, sizes: [2, 5, 8, 10], type:'local', class: 'pager' },
         rowSelectClick: function (e, row) {
-        	console.log('Fui Clicado!');
+	    console.log('O Item foi Selecionado!');
             return true;
         },
         rowDeleteClick: function (e, row) {
             event.preventDefault();
-            console.log('Fui Clicado!');
+            console.log('O Item foi Deletado!');
             return false;
         },
         rowEditClick: function (e, row) {
             event.preventDefault();
-            console.log('Fui Clicado!');
+            console.log('O Item foi Editado!');
             return false;
         },
         rowViewClick: function (e, row) {
             event.preventDefault();
-            console.log('Fui Clicado!');
+            console.log('O Item foi Visualizado!');
             return false;
         },
         pagerReloadClick: function (e, pagerConfig) {
-        	console.log('Fui Atualizado!');
+        	console.log('A Tabela foi Atualizada!');
         }
     };
 
-	var init = function(){
-		calcularImpostos($scope.contatos);
-	};
-
-	var calcularImpostos = function(contatos){
-		contatos.forEach(function(contato){
-			contato.operadora.precoComImposto = calcularImposto(contato.operadora.preco);
-		});
-	}
-
-	var carregarContatos = function () {
-		contatosAPI.getContatos($scope);
-	};
-
-	$scope.apagarContatos = function(contatos){
-		contatos.forEach(function(contato) {
-			 if (contato.selecionado) contatosAPI.deleteContato($scope, contato);
-		});
-	};
-
-	$scope.verificarContatoSelecionado = function(contatos) {
-		$scope.hasContatoSelecionado = contatos.some(function(contato) {
-			return contato.selecionado;
-		});
-	};
-
-	$scope.ordernarPor = function(campo) {
-		$scope.ordenarContato = campo;
-		$scope.direcaoOrdenacao = !$scope.direcaoOrdenacao;
-	};
-	
-	var calcularImposto = function(preco){
-		var imposto = 1.2;
-		return preco * imposto;
-	};
-
-	init();
-	//carregarContatos();
     });
 })();
