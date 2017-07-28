@@ -106,8 +106,7 @@
             field: 'nome',
             displayName: 'Nome',
             sort: true,
-            width: "50%",
-            filter: 'capitalize'
+            width: "50%"
         }, {
             field: 'telefone',
             displayName: 'Telefone',
