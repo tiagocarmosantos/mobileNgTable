@@ -1,25 +1,39 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="sampleApp">
 <head>
 	<title>mobileNgTable sample</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"/>
 	
-	<script src="jquery-mobile-angular-adapter-standalone.js"></script> 
-	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
-	<script src="../lib/mobileNgTable.js"></script>
-	<link rel="stylesheet" href="footable/footable.core.css"/>
-	<script src="footable/footable.js" ></script>
-	<script src="footable/footable.sort.js" ></script>
-	<script src="footable/footable.filter.js" ></script>
-	<script src="sample.js"></script>
+	<!-- Latest compiled and minified JavaScript from AngularJS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+	
+	<!-- Latest compiled and minified JavaScript from JQuery -->
+	<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	
+	<!-- Latest compiled and minified JavaScript from AngularJS APP -->
+	<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/sample.js"></script>
+	<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/lib/mobileNgTable.js"></script>
+	<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/footable/footable.js" ></script>
+	<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/footable/footable.sort.js" ></script>
+	<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/footable/footable.filter.js" ></script>
+	
+	<!-- Latest compiled and minified CSS from JQuery -->
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+	
+	<!-- Latest compiled and minified CSS from Footable -->
+	<link rel="stylesheet" href="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/footable/footable.core.css"/>
+	
+	<!-- Latest compiled and minified CSS from BootStrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 </head>
-
-<body data-ng-app="sampleApp">
-    <h2 ng-if="contatos.length > 0">::ngComponents - Table</h2>
-    <div class="table-responsive">
-	<mobile-ng-table ng-if="contatos.length > 0" load-Repeat="contatosNgTable"></mobile-ng-table>
-    </div>
+<body ng-controller="sampleController">
+    <div style="padding: 5%;">
+  	  <h2 ng-if="contatos.length > 0">::ngComponents - Table</h2>
+  	  <div class="table-responsive">
+  	    <mobile-ng-table ng-if="contatos.length > 0" load-Repeat="contatosNgTable"></mobile-ng-table>
+  	  </div>
+	  </div>
 </body>
-
 </html>
