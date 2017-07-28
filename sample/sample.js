@@ -1,7 +1,7 @@
 (function() {
     var app = angular.module("sampleApp", ['xMobileNgTable']);
 	
-    app.controller('sampleController', function($scope, $filter) {
+    app.controller('sampleController', function($scope, $filter, $timeout) {
      $scope.app = "Lista Telefônica";
      $scope.contatos = [
     {
@@ -144,6 +144,11 @@
         	console.log('A Tabela foi Atualizada!');
         }
     };
+	    
+    (function initController() {
+        //$timeout(function () { $('table').trigger('footable_redraw'); }, 0);
+        $timeout(function () { $('.footable').footable(); }, 0);
+    })();
 
     });
 })();
