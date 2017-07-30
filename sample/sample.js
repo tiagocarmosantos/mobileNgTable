@@ -116,6 +116,7 @@
         }, {
             field: 'data',
             displayName: 'Data',
+	    hide: 'phone,tablet',
             sort: true,
             width: '20%',
             filter: 'date'
