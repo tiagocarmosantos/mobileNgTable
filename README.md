@@ -1,112 +1,148 @@
-介紹
-============
+==================
+== Introduction ==
+==================
 
-在jquerymobile網頁裡使用json格式以表格方式呈現
+I found this project in http://ngmodules.org/. So I catch this project for use it in my private project. However in the previous version, it contains a some problems, mainly as Responsive and Linkage. That this why, I change this project for separate Functionality from Interafce. 
 
-套件引用：
-https://github.com/opitzconsulting/jquery-mobile-angular-adapter jquery-mobile-angular-adapter-standalone.js
+For instance, In new version, you can use this Table with another CSS Frameworks, like Bootstrap, Material Design and So on. Besides that you can use various ways to activate responsiveness, like Footable, JQueryMobile or Bootstrap. In this example I user Footable but you are free to use another way without lose thes functionalities.
 
-jquery.mobile-1.3.1.css
+It's no longer important and a fucntions for Paginations, it's may work in server or local mode. In local mode, you don't need implement aditional code. But in server code, you need add you API Service call to return data.
 
-https://github.com/fooplugins/FooTable footable 2.0.1.4
+================
+== How To Use ==
+================
 
-範例：http://plnkr.co/edit/YPuB7xQo2Ox4bnSramT7
+1. Add the required references.
+	1.1 AngularJS
+		<!-- Latest compiled and minified JavaScript from AngularJS -->
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular-route.js"></script>
+	1.2 JQuery
+		<!-- Latest compiled and minified JavaScript from JQuery -->
+		<script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+	1.3 MobileNgTable
+		<!-- Latest compiled and minified JavaScript from MobileNgTable -->
+		<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/lib/mobileNgTable.js"></script>
+		
+				
+2. Add the Optional references.
+	2.1 JQuery
+		<!-- Latest compiled and minified CSS from JQuery -->
+		<link rel="stylesheet" href="https://code.jquery.com/mobile/1.3.1/jquery.mobile-1.3.1.min.css" />
+		
+	2.2 BootStrap
+		<!-- Latest compiled and minified CSS from BootStrap -->
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	
+	2.3 FooTable
+		<!-- Latest compiled and minified JavaScript from FooTable -->
+		<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/footable/footable.js" ></script>
+		<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/footable/footable.sort.js" ></script>
+		<script src="https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/footable/footable.filter.js" ></script>
 
-使用
-=====
+3. Add this code to your Document or Code HTML. 
 
-1.在您指定的html中填上code.
+	<mobile-ng-table ng-if="contatos.length > 0" load-Repeat="contatosNgTable"></mobile-ng-table>
 
-```html
-	<mobile-Ng-Table load-Repeat="mobileNgTable" data-mode="columntoggle" class="ui-responsive table-stroke footable"></mobile-Ng-Table>
-```
+4. Add this code to your AngularJS Controller file. 
 
-2.在js中需初始化欄位結構.
-
-```javascript
-	$scope.mobileNgTable = {
-         data: 'mobileNgTableData',
-         columnDefs: [{
-             field: 'id',
-             displayName: '編號',
-			 width:"10%"
-         }, {
-             field: 'accountName',
-             displayName: '科目名稱',
-			 width:"50%"
-         }, {
-             field: 'accountType',
-             displayName: '型態',
-             hide: "phone,tablet",
-             sort: true,
-			 width:"20%"
-         }, {
-             field: 'cash',
-             displayName: '金額',
-             hide: "phone,tablet",
-			 width:"10%",
-			 filter:"number:1",
-         }],
-         rowDeleteClick: function(e, row) {
-             var result = $filter('filter')($scope.mobileNgTableData, row);
-             if (result.length > 0) {
-                 var index = $scope.mobileNgTableData.indexOf(result[0]);
-                 $scope.mobileNgTableData.splice(index, 1);
-             }
-         }
-     };
-```
-
-3.將json資料set到mobileNgTable裡
-
-```javascript
-	$scope.mobileNgTableData = [{
-            "id": 1,
-            "accountName": "3C產品",
-            "accountType": "E",
-			"cash":2.522
+    $scope.contatosNgTable = {
+        data: 'contatos',
+        class: 'ui-responsive table table-hover table-striped table-bordered table-condensed table-list table-stroke footable',
+        search: 'pesquisarContato',
+        select: 'selecionado',
+        visualisable: 'visualizavel',
+        editable: 'editavel',
+        deletable: 'deletavel',
+        columnDefs: [{
+            field: 'serial',
+            displayName: 'Serial',
+            hide: 'phone,tablet',
+            sort: true,
+            width: "10%"
         }, {
-            "id": 2,
-            "accountName": "三餐.breakfast",
-            "accountType": "E",
-			"cash":2.5
+            field: 'nome',
+            displayName: 'Nome',
+            sort: true,
+            width: "50%"
+        }, {
+            field: 'telefone',
+            displayName: 'Telefone',
+            hide: 'phone,tablet',
+            sort: true,
+            width: '20%'
+        }, {
+            field: 'data',
+            displayName: 'Data',
+            sort: true,
+            width: '20%',
+            filter: 'date'
+        }],
+        pager: { enable: true, startPage: 1, limitPerPage: 2, sizes: [2, 5, 8, 10], type:'local', class: 'pager' },
+        rowSelectClick: function (e, row) {
+	    console.log('O Item foi Selecionado!');
+            return true;
         },
-        ......];
-```
+        rowDeleteClick: function (e, row) {
+            event.preventDefault();
+            console.log('O Item foi Deletado!');
+            return false;
+        },
+        rowEditClick: function (e, row) {
+            event.preventDefault();
+            console.log('O Item foi Editado!');
+            return false;
+        },
+        rowViewClick: function (e, row) {
+            event.preventDefault();
+            console.log('O Item foi Visualizado!');
+            return false;
+        },
+        pagerReloadClick: function (e, pagerConfig) {
+        	console.log('A Tabela foi Atualizada!');
+        }
+    };
 
-4.啟動mobileNgTable
+4.1 In above code, where contains "data: 'contatos'" you need use for 'contatos' your array objects. Like this
 
-```javascript
-	$(function() {
-    $(document).on("pageshow", "#page", function(event, data) {
-        $('.footable').footable();
-    });
-});
-```
+	$scope.contatos = [{ "id": 1, "nome": "Jean", "telefone": "98621-4487", "data": "2017-02-11T02:15:12.356Z",
+      				"operadora": { "nome": "Oi", "codigo": 14, "categoria": "Celular", "preco": 2}, "cor": "blue", 
+				"selecionado": false, "visualizavel": true, "editavel": true, "deletavel": true }];
 
-API
-=====
+	Atention: In array object I create four important attributes, them are use by the component to relationship with your respective functions: Select, View, Edit and Delete. But any this is required.
+		[{ "selecionado": false, "visualizavel": true, "editavel": true, "deletavel": true }]
 
-設定屬性
+5. Finally, add this code to End your AngularJS Controller file
 
-data：資料集
+    (function initController() {
+        //$timeout(function () { $('table').trigger('footable_redraw'); }, 0);
+        $timeout(function () { $('.footable').footable(); }, 0);
+    })();
 
-columnDefs定義
+=====================
+== API Description ==
+=====================
+
+conjunto de atributos 
+
+de dados: dados definido 
+
+columnDefs definido 
     
-    field : 'fixTime',       資料對應欄位名稱
-    displayName : '時間',    欄位名稱
-    width:"20%",             欄位寬度
-    hide:"phone,tablet",     配合FooTable元件，在phone下此欄位隱藏，在tablet下此欄位隱藏
-    filter:"number:0",       使用filter解析
-    sort:true                配合FooTable元件，開啟視覺化排列功能
-    cellTemplate:...         自訂欄位dom
+    de campo: 'fixTime', de dados correspondentes para o nome da coluna 
+    displayName: 'tempo' nome de campo 
+    largura: "20%", coluna de largura 
+    hide: "phone, tablet", com elemento FooTable, pelo telefone neste campo oculto, neste tablet escondido campo de 
+    filtro: "number: 0", filtro de uso analisar 
+    tipo: true com elemento FooTable, aberta funções arranjo visualização 
+    CellTemplate: ... campos personalizados dom 
 
-方法
+método 
 
-rowClick:function(e,row){} //按下後
+rowClick: function (e, r ow) {} // Depois de pressionar 
 
-itemOnLongPress:function(e,row){} //長按後
+itemOnLongPress: function (e, row) {} // Longa imprensa 
 
-itemOnTouchEnd:function(e,row){} //按下後結束
+itemOnTouchEnd: function (e, row) {} // End pressionado 
 
-rowDeleteClick:function(e,row){} //監聽時會有刪除鈕出來
+rowDeleteClick: function (e, row) {} // irá apagar botão quando ouvir para fora
