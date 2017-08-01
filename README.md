@@ -151,7 +151,7 @@ It's no longer important and a fucntions for Paginations, it's may work in serve
 == API Description ==
 =====================
 
-1. Atributos do Componente.
+1. Attributes.
 
 	1.1 Data - A required field, use it to link your JSON array objects.
 	1.2 Class - A optional field, use it to define your Table CSS.
@@ -177,7 +177,7 @@ It's no longer important and a fucntions for Paginations, it's may work in serve
 			b - 'server' you need define the method pagerReloadClick. See in Item 2.5.
 		1.9.6 Class - A required field, use it to define your Pager Toolbar CSS.
     
-2. Métodos
+2. Methods
 
 	2.1 rowSelectClick: function (e, row) - A optional method, use it to define a behavior to select item event click.
 	2.2 rowDeleteClick: function (e, row) - A optional method, use it to define a behavior to delete item event click.
@@ -185,4 +185,10 @@ It's no longer important and a fucntions for Paginations, it's may work in serve
 	2.4 rowViewClick: function (e, row) - A optional method, use it to define a behavior to view item event click.
 	2.5 pagerReloadClick: function (e, row) - A optional method, use it to define a behavior to pager's itens event click, if your define pager type like 'server'. Otherwise don't need define it.
 
+3. Samples - Live Demos
+
+	3.1 Sample 01 - FooTable and BootStrap
+		https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/index.html
+	3.2 Sample 02 - JQuery Mobile and BootStrap
+		https://rawgit.com/tiagocarmosantos/mobileNgTable/master/sample/index02.html
 
