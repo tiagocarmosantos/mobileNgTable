@@ -153,7 +153,6 @@
     (function initController() {
         //$timeout(function () { $('table').trigger('footable_redraw'); }, 0);
         $timeout(function () { $('.footable').footable(); }, 0);
-	$timeout(function () { $('.ui-responsive').enhanceWithin(); }, 0);
     })();
 
     });
