@@ -101,25 +101,29 @@
             displayName: 'Serial',
             hide: 'phone,tablet',
             sort: true,
-            width: "10%"
+            width: "10%",
+	    priority: 4
         }, {
             field: 'nome',
             displayName: 'Nome',
             sort: true,
-            width: "50%"
+            width: "50%",
+	    priority: 1
         }, {
             field: 'telefone',
             displayName: 'Telefone',
             hide: 'phone,tablet',
             sort: true,
-            width: '20%'
+            width: '20%',
+	    priority: 3
         }, {
             field: 'data',
             displayName: 'Data',
 	    hide: 'phone,tablet',
             sort: true,
             width: '20%',
-            filter: 'date'
+            filter: 'date',
+	    priority: 2
         }],
         pager: { enable: true, startPage: 1, limitPerPage: 2, sizes: [2, 5, 8, 10], type:'local', class: 'pager' },
         rowSelectClick: function (e, row) {
