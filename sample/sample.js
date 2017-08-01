@@ -90,7 +90,7 @@
 	    
     $scope.contatosNgTable = {
         data: 'contatos',
-        class: 'ui-responsive table table-hover table-striped table-bordered table-condensed table-list table-stroke footable',
+        class: 'table table-hover table-striped table-bordered table-condensed table-list table-stroke',
         search: 'pesquisarContato',
         select: 'selecionado',
         visualisable: 'visualizavel',
